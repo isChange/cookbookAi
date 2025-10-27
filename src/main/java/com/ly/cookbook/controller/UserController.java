@@ -5,6 +5,7 @@ import com.ly.cookbook.common.model.Result;
 import com.ly.cookbook.model.dto.ChangePasswordDTO;
 import com.ly.cookbook.model.dto.RegisterDTO;
 import com.ly.cookbook.model.dto.UpdateUserDTO;
+import com.ly.cookbook.model.vo.TokenInfoVO;
 import com.ly.cookbook.model.vo.UserInfoVO;
 import com.ly.cookbook.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -81,6 +82,14 @@ public class UserController {
     @Operation(summary = "检查用户Token是否可用", description = "检查用户Token是否可用")
     public Result<Boolean> checkToken() {
         return Result.success(userService.checkUserToken(StpUtil.getLoginIdAsLong()));
+    }
+    /**
+     * 获取用户Token信息
+     */
+    @GetMapping("/token/info")
+    @Operation(summary = "获取Token信息", description = "获取当前Token的详细信息")
+    public Result<TokenInfoVO> getTokenInfo() {
+        return Result.success(userService.getUserTokenInfo(StpUtil.getLoginIdAsLong()));
     }
 }
 

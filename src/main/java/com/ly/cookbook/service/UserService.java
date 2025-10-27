@@ -5,6 +5,7 @@ import com.ly.cookbook.model.User;
 import com.ly.cookbook.model.dto.ChangePasswordDTO;
 import com.ly.cookbook.model.dto.RegisterDTO;
 import com.ly.cookbook.model.dto.UpdateUserDTO;
+import com.ly.cookbook.model.vo.TokenInfoVO;
 import com.ly.cookbook.model.vo.UserInfoVO;
 
 /**
@@ -53,4 +54,11 @@ public interface UserService extends IService<User> {
      * @return
      */
     boolean checkUserToken(Long userId);
+
+    /**
+     * 返回用户Token信息
+     * @param userId 用户ID
+     * @return
+     */
+    TokenInfoVO getUserTokenInfo(Long userId);
 }

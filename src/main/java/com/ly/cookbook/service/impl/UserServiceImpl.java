@@ -14,6 +14,7 @@ import com.ly.cookbook.model.User;
 import com.ly.cookbook.model.dto.ChangePasswordDTO;
 import com.ly.cookbook.model.dto.RegisterDTO;
 import com.ly.cookbook.model.dto.UpdateUserDTO;
+import com.ly.cookbook.model.vo.TokenInfoVO;
 import com.ly.cookbook.model.vo.UserInfoVO;
 import com.ly.cookbook.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -234,6 +235,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
         User user = this.getById(userId);
         AssertUtil.isNotNull(user, ErrorCode.NO_ACCOUNT);
         return user.getUsedToken() < user.getTotalToken();
+    }
+
+    @Override
+    public TokenInfoVO getUserTokenInfo(Long userId) {
+        User user = this.getById(userId);
+        return TokenInfoVO.builder()
+                .userId(userId)
+                .role(user.getRole())
+                .username(user.getUsername())
+                .usedToken(user.getUsedToken())
+                .totalToken(user.getTotalToken())
+                .build();
     }
 
     /**
