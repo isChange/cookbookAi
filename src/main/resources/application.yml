@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: cookbook
+  profiles:
+    active: local
+server:
+  port: 8000
+  servlet:
+    context-path: /api/v1
+
+# Prometheus 监控配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+

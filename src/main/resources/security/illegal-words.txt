@@ -1,0 +1,57 @@
+# Linux系统危险命令黑名单
+# 文件操作危险命令
+rm -rf
+sudo rm
+format
+del /f
+mkfs
+fdisk
+
+# 系统控制命令  
+shutdown -h
+reboot
+halt
+poweroff
+init 0
+init 6
+
+# 权限修改命令
+chmod 000
+chmod 777
+chown -R
+chgrp -R
+
+# 进程管理危险命令
+kill -9
+killall
+pkill -f
+
+# 磁盘操作命令
+dd if=
+cfdisk
+parted
+
+# 用户管理命令
+passwd
+su -
+sudo su
+userdel
+usermod
+
+# 计划任务命令
+crontab -r
+at now
+
+# 网络危险命令
+iptables -F
+ufw disable
+
+# 系统文件操作
+> /etc/
+>> /etc/
+cat > /etc/
+echo > /etc/
+
+# 批量操作
+find / -exec
+xargs rm

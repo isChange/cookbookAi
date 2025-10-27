@@ -1,0 +1,119 @@
+spring:
+  data:
+    redis:
+      host: 115.190.45.174
+      port: 6377
+      password: lQltwsffOX
+      database: 1
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池最大连接数
+          max-active: 200
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1ms
+          # 连接池中的最大空闲连接
+          max-idle: 10
+          # 连接池中的最小空闲连接
+          min-idle: 1
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 115.190.45.174
+    port: 5672
+    username: admin
+    password: 1KkZN5ZpGgYze41k4KwZ
+    virtual-host: /
+    # 发送者确认
+    publisher-confirm-type: correlated
+    publisher-returns: true
+    # 消费者配置
+    listener:
+      simple:
+        # 手动确认消息
+        acknowledge-mode: manual
+        # 消费者最小数量
+        concurrency: 1
+        # 消费者最大数量
+        max-concurrency: 10
+        # 每次从队列中取几条消息
+        prefetch: 1
+        # 启动时是否默认启动容器
+        auto-startup: true
+        # 被拒绝时重新进入队列
+        default-requeue-rejected: true
+    template:
+      # 消息是否发送到队列的确认
+      mandatory: true
+  datasource:
+    url: jdbc:postgresql://115.190.45.174:5432/ai_agent
+    username: postgres
+    password: eQ7aJ1zm3q
+  ai:
+    # 临时禁用MCP配置以解决Jackson反序列化问题
+    # mcp:
+    #   client:
+    #     stdio:
+    #       servers-configuration: classpath:/mcp/mcp-servers.json
+    dashscope:
+      api-key: sk-c1fb54b6bcd34381b851e99152c560d4
+      chat:
+        options:
+          model: qwen-max
+    chat:
+      memory:
+        repository:
+          jdbc:
+            initialize-schema: always
+#            schema: classpath:db/init-chat-memory.sql
+
+# SerpAPI 配置（用于网页搜索工具）
+serpapi:
+  key: adc33aa598fcca613161f2c0100eb0683fb67791824abc0478ae9c2f2ccb39b1
+  engine: google
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/*.xml
+# Sa-Token 配置
+sa-token:
+  # Token 名称（同时也是 Cookie 名称）
+  token-name: Authorization
+  # Token 有效期（单位：秒）默认30天，-1 代表永久有效
+  timeout: 86400
+  # Token 最低活跃频率（单位：秒），如果 Token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
+  active-timeout: -1
+  # 是否允许同一账号多地同时登录（为 true 时允许一起登录，为 false 时新登录挤掉旧登录）
+  is-concurrent: false
+  # 在多人登录同一账号时，是否共用一个 Token（为 true 时所有登录共用一个 Token，为 false 时每次登录新建一个 Token）
+  is-share: false
+  # Token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: true
+  # 是否从 Cookie 中读取 Token
+  is-read-cookie: true
+  # 是否从 Header 中读取 Token
+  is-read-header: true
+  # 是否从请求体中读取 Token
+  is-read-body: true
+  # 是否在初始化配置时在控制台打印版本字符画
+  is-print: true
+# springdoc-openapi
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.ly.cookbook.controller
+# knife4j
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+  production: true
