@@ -244,6 +244,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>
                 .userId(userId)
                 .role(user.getRole())
                 .username(user.getUsername())
+                .nickname(user.getNickname())
                 .usedToken(user.getUsedToken())
                 .totalToken(user.getTotalToken())
                 .build();
