@@ -1,9 +1,6 @@
 package com.ly.cookbook.advisor;
 
-import cn.dev33.satoken.stp.StpUtil;
-import com.ly.cookbook.model.User;
-import com.ly.cookbook.service.UserService;
-import jakarta.annotation.Resource;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClientMessageAggregator;
 import org.springframework.ai.chat.client.ChatClientRequest;
